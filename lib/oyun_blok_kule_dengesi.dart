@@ -80,7 +80,7 @@ final kuleDengesiConfig = GameConfig(
       'Rút, xếp lên và để đối thủ làm đổ!',
       'Hilahin, ipatong, at hayaang bumagsak sa kalaban!',
     ],
-  seedColor: const Color(0xFF8D6E63),
+  seedColor: const Color(0xFFA47148),
   icon: Icons.align_vertical_bottom_rounded,
   rules: TowerRules(),
   buildPlay: (ctx) => TowerView(ctx: ctx),
