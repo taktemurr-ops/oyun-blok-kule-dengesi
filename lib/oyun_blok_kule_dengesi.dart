@@ -188,7 +188,7 @@ final kuleDengesiConfig = GameConfig(
       'जिसके पास सुरक्षित चाल न बचे, वह हारता है। संकेत जीतने वाली चाल दिखाता है।',
       'যার নিরাপদ চাল নেই সে হারে। ইঙ্গিত জেতার চাল দেখায়।',
       'Yang tak punya langkah aman kalah. Petunjuk menunjukkan langkah menang.',
-      'Yang tak punya lnomborh aman kalah. Petunjuk menunjukkan lnomborh menang.',
+      'Yang tak punya langkah aman kalah. Petunjuk menunjukkan langkah menang.',
       'ฝ่ายที่ไม่มีตาปลอดภัยจะแพ้ คำใบ้จะแสดงตาที่ชนะ',
       'Ai hết nước an toàn sẽ thua. Gợi ý chỉ ra nước thắng.',
       'Talo ang walang ligtas na galaw. Ipinapakita ng pahiwatig ang panalong galaw.',
