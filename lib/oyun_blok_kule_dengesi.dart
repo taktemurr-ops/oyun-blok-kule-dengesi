@@ -75,7 +75,7 @@ final kuleDengesiConfig = GameConfig(
       'खींचें, ऊपर रखें और विरोधी की बारी में गिरने दें!',
       'টানুন, ওপরে রাখুন, প্রতিপক্ষের হাতে ভেঙে পড়ুক!',
       'Tarik, tumpuk, biar lawan yang merobohkan!',
-      'Tarik, tumpuk, biar lawan yang merobohkan!',
+      'Tarik, susun, biar lawan yang merobohkan!',
       'ดึง ซ้อน แล้วให้คู่แข่งทำพัง!',
       'Rút, xếp lên và để đối thủ làm đổ!',
       'Hilahin, ipatong, at hayaang bumagsak sa kalaban!',

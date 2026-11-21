@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:studio_core/core/strings.dart';
 import 'package:studio_core/app/game_api.dart';
 import 'package:studio_core/app/services/audio.dart';
 import 'package:studio_core/core/game_rules.dart';
@@ -30,7 +31,6 @@ class _TowerViewState extends State<TowerView> {
   double _bw = 40, _bh = 20;
 
   PlayContext get ctx => widget.ctx;
-  bool get _tr => ctx.lang == 'tr';
 
   @override
   void initState() {
@@ -62,8 +62,8 @@ class _TowerViewState extends State<TowerView> {
       setState(() {
         _shake = (i, k);
         _msg = !game.removable(i)
-            ? (_tr ? 'Tepedeki katlara dokunulmaz.' : 'Top levels can\'t be touched.')
-            : (_tr ? 'Bu blok kuleyi taşıyor!' : 'This block holds the tower!');
+            ? (Strings.tx(ctx.lang, 'Tepedeki katlara dokunulmaz.', 'Top levels can\'t be touched.'))
+            : (Strings.tx(ctx.lang, 'Bu blok kuleyi taşıyor!', 'This block holds the tower!'));
       });
       Timer(const Duration(milliseconds: 300), () {
         if (mounted) setState(() => _shake = null);
@@ -105,8 +105,8 @@ class _TowerViewState extends State<TowerView> {
     final won = game.loser == 1;
     ctx.sfx(won ? Sfx.win : Sfx.lose);
     setState(() => _msg = won
-        ? (_tr ? 'Rakibin güvenli hamlesi kalmadı. Kazandın!' : 'No safe move left for the rival. You win!')
-        : (_tr ? 'Güvenli hamlen kalmadı, kule yıkıldı.' : 'No safe move left. The tower falls.'));
+        ? (Strings.tx(ctx.lang, 'Rakibin güvenli hamlesi kalmadı. Kazandın!', 'No safe move left for the rival. You win!'))
+        : (Strings.tx(ctx.lang, 'Güvenli hamlen kalmadı, kule yıkıldı.', 'No safe move left. The tower falls.')));
     Timer(const Duration(milliseconds: 900), () {
       ctx.finish(RoundResult(
         won: won,
@@ -146,8 +146,8 @@ class _TowerViewState extends State<TowerView> {
               child: Text(
                   _msg ??
                       (yourTurn
-                          ? (_tr ? 'Sıra sende: güvenli bir blok çek' : 'Your turn: pull a safe block')
-                          : (_tr ? 'Rakip düşünüyor…' : 'Rival is thinking…')),
+                          ? (Strings.tx(ctx.lang, 'Sıra sende: güvenli bir blok çek', 'Your turn: pull a safe block'))
+                          : (Strings.tx(ctx.lang, 'Rakip düşünüyor…', 'Rival is thinking…'))),
                   style: Theme.of(context).textTheme.titleSmall),
             ),
             const Icon(Icons.timer_outlined, size: 18),
