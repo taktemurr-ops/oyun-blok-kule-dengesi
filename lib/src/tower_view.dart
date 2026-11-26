@@ -6,19 +6,36 @@ import 'package:studio_core/core/strings.dart';
 import 'package:studio_core/app/game_api.dart';
 import 'package:studio_core/app/services/audio.dart';
 import 'package:studio_core/core/game_rules.dart';
+import 'package:studio_core/app/studio_ui.dart';
 
 import 'tower_engine.dart';
 import 'tower_rules.dart';
 
-class TowerView extends StatefulWidget {
+final Map<StudioLook, ThemeData> _studioThemes = {};
+
+/// Oyun ekranı: düğmeler, çipler, üst bilgi ve pencereler onaylı koyu
+/// tasarımda (merkezin paleti, studio-core StudioLook); tahta çizimi kendi
+/// renklerini korur.
+class TowerView extends StatelessWidget {
   final PlayContext ctx;
   const TowerView({super.key, required this.ctx});
 
   @override
-  State<TowerView> createState() => _TowerViewState();
+  Widget build(BuildContext context) {
+    final look = StudioLook.of(context);
+    return Theme(data: _studioThemes[look] ??= buildStudioTheme(look), child: TowerViewBody(ctx: ctx));
+  }
 }
 
-class _TowerViewState extends State<TowerView> {
+class TowerViewBody extends StatefulWidget {
+  final PlayContext ctx;
+  const TowerViewBody({super.key, required this.ctx});
+
+  @override
+  State<TowerViewBody> createState() => _TowerViewState();
+}
+
+class _TowerViewState extends State<TowerViewBody> {
   late TowerLevel level;
   late TowerGame game;
   (int, int)? _hint;
