@@ -6,9 +6,12 @@ import 'package:studio_core/core/strings.dart';
 import 'package:studio_core/app/game_api.dart';
 import 'package:studio_core/app/services/audio.dart';
 import 'package:studio_core/core/game_rules.dart';
+import 'package:studio_core/app/studio_ui.dart';
 
 import 'tower_engine.dart';
 import 'tower_rules.dart';
+
+final Map<StudioLook, ThemeData> _studioThemes = {};
 
 class TowerView extends StatefulWidget {
   final PlayContext ctx;
@@ -129,8 +132,15 @@ class _TowerViewState extends State<TowerView> {
     _persist();
   }
 
+  /// Oyun içi düğmeler, çipler ve yazılar onaylı koyu tasarımda (merkezin
+  /// paleti); tahta çizimi kendi renklerini korur.
   @override
   Widget build(BuildContext context) {
+    final look = StudioLook.of(context);
+    return Theme(data: _studioThemes[look] ??= buildStudioTheme(look), child: Builder(builder: _build));
+  }
+
+  Widget _build(BuildContext context) {
     return LayoutBuilder(builder: (context, cons) {
       final n = game.layers.length + 2;
       _bh = math.max(10.0, math.min(cons.maxHeight * 0.74 / n, 30.0));
