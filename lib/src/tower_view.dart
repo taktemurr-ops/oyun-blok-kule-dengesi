@@ -13,15 +13,29 @@ import 'tower_rules.dart';
 
 final Map<StudioLook, ThemeData> _studioThemes = {};
 
-class TowerView extends StatefulWidget {
+/// Oyun ekranı: düğmeler, çipler, üst bilgi ve pencereler onaylı koyu
+/// tasarımda (merkezin paleti, studio-core StudioLook); tahta çizimi kendi
+/// renklerini korur.
+class TowerView extends StatelessWidget {
   final PlayContext ctx;
   const TowerView({super.key, required this.ctx});
 
   @override
-  State<TowerView> createState() => _TowerViewState();
+  Widget build(BuildContext context) {
+    final look = StudioLook.of(context);
+    return Theme(data: _studioThemes[look] ??= buildStudioTheme(look), child: TowerViewBody(ctx: ctx));
+  }
 }
 
-class _TowerViewState extends State<TowerView> {
+class TowerViewBody extends StatefulWidget {
+  final PlayContext ctx;
+  const TowerViewBody({super.key, required this.ctx});
+
+  @override
+  State<TowerViewBody> createState() => _TowerViewState();
+}
+
+class _TowerViewState extends State<TowerViewBody> {
   late TowerLevel level;
   late TowerGame game;
   (int, int)? _hint;
@@ -132,15 +146,8 @@ class _TowerViewState extends State<TowerView> {
     _persist();
   }
 
-  /// Oyun içi düğmeler, çipler ve yazılar onaylı koyu tasarımda (merkezin
-  /// paleti); tahta çizimi kendi renklerini korur.
   @override
   Widget build(BuildContext context) {
-    final look = StudioLook.of(context);
-    return Theme(data: _studioThemes[look] ??= buildStudioTheme(look), child: Builder(builder: _build));
-  }
-
-  Widget _build(BuildContext context) {
     return LayoutBuilder(builder: (context, cons) {
       final n = game.layers.length + 2;
       _bh = math.max(10.0, math.min(cons.maxHeight * 0.74 / n, 30.0));
